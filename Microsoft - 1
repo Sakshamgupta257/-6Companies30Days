@@ -1,0 +1,46 @@
+class Solution {
+public:
+    int evalRPN(vector<string> &tokens)
+    {
+        stack<long long> s;
+        for (auto letter : tokens)
+        {
+            if (letter == "+" || letter == "-" || letter == "*" || letter == "/")
+            {
+                long long num1 = s.top();
+                s.pop();
+    
+                long long num2 = s.top();
+                s.pop();
+    
+                char ch = letter[0];
+                switch (ch)
+                {
+                case '+':
+                    s.push(num2 + num1);
+                    break;
+    
+                case '-':
+                    s.push(num2 - num1);
+                    break;
+    
+                case '*':
+                    s.push(num2 * num1);
+                    break;
+                case '/':
+                    s.push(num2 / num1);
+                    break;
+    
+                default:
+                    break;
+                }
+            }
+            else
+            {
+                long long num = stoi(letter);
+                s.push(num);
+            }
+        }
+        return s.top();
+    }
+};
